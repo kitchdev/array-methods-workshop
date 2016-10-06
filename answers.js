@@ -114,3 +114,98 @@ function countVowels(string){
 }
 
 console.log(countVowels("The quick brown fox"));
+
+
+// Write a function called highLow that takes an array of numbers, and returns an
+// object with a property highest containing the highest number, and a property 
+// lowest containing the lowest number, using Array.prototype.reduce.
+
+// For example, starting with [1, -10, 20, 40, 5], your function should return 
+// {highest: 40, lowest: -10}.
+
+// Hint: Javascript has a special value called Infinity, which is higher than any
+// other number. See if you can initialize your reduce accumulator with 
+// Infinity and -Infinity :)
+
+function highLow(numArr){
+
+    return numArr.reduce(function(prevNum, num){
+        if(num > prevNum.highest){
+            prevNum.highest = num;
+        }
+        if(num < prevNum.highest){
+            prevNum.lowest = num;
+        }
+        return prevNum;
+    }, {
+        highest: -Infinity,
+        lowest: Infinity
+    })
+
+}
+console.log(highLow([6,7,4,1,8,9]));
+
+// Expanding on exercise 6, write a function called highLowTwo that takes an array
+//of numbers, and returns the higest, second highest, lowest, and second lowest numbers.
+
+// For example, starting with [1, -10, 20, 40, 5], your function should return:
+
+function highLowTwo(numArr){
+        return numArr.reduce(function(obj, num){
+            
+        if(num > obj.highest){
+           
+            obj.secondhighest = obj.highest;
+            
+             obj.highest = num;
+        }
+        if(num < obj.highest){
+            
+            obj.secondlowest = obj.lowest;
+            
+            obj.lowest = num;
+        }
+        return obj;
+    }, {
+        highest: -Infinity,
+        secondhighest: -Infinity,
+        lowest: Infinity,
+        secondlowest: Infinity
+        
+    })
+
+}
+console.log(highLowTwo([6,7,4,1,8,9]));
+
+
+//Write a function called countChars that takes a string, and returns an object
+//where the keys are letters, and the value is the number of times that letter appears.
+// For example, with input "hello world", the output should be:
+
+// {
+//   "h": 1,
+//   "e": 1,
+//   "l": 3,
+//   "o": 2,
+//   "w": 1,
+//   "r": 1,
+//   "d": 1
+// }
+// NOTE: Unlike arrays, objects don’t have any ordering on them. When you print 
+//your object on the console, your keys may be displayed in a different order, and
+//it does not matter.
+
+function countChars(string){
+    return string.split("").filter(function(c){return c !== " ";}).reduce(function(obj, letter){
+        if(obj[letter]){
+            obj[letter] += 1;
+        }
+
+        else {
+            obj[letter] = 1
+        }
+        return obj;
+    }, {})
+}
+console.log(countChars("Hello World"));
+
